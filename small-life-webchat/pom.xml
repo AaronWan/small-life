@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>com.smalllife.webchat</artifactId>
+    <artifactId>small-life-webchat</artifactId>
     <packaging>war</packaging>
     <dependencies>
 
