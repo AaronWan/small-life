@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static com.smalllife.common.util.XMLUtil.beanToXml;
 import static com.smalllife.common.util.XMLUtil.xmlToBean;
 
 /**
@@ -24,6 +25,8 @@ public class MsgTest {
                 "</xml>";
         TextMsg msg=xmlToBean(xml,TextMsg.class);
         System.out.println(JsonUtil.toPrettyJson(msg));
+
+        System.out.println(beanToXml(msg));
     }
 
 
