@@ -34,8 +34,8 @@ public class WebchatMessageResource {
                                  @QueryParam("openid") String openId,
                                  @QueryParam("timestamp") String timestamp,
                                  @QueryParam("nonce") String nonce,@RequestBody byte[] body) throws AesException {
+        log.info("params:{}",new String(body));
         Object[] content=XMLParse.extract(new String(body));
-        log.info(Arrays.asList(content).toString());
         return null;
     }
 
