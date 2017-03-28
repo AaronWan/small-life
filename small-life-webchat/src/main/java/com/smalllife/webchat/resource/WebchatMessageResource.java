@@ -19,7 +19,7 @@ public class WebchatMessageResource {
     @Path("/")
     @POST
     @Produces(MediaType.APPLICATION_XML)
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_XML)
     public BaseMsg receiveMessage(@QueryParam("signature") String signature,
                                  @QueryParam("openid") String openId,
                                  @QueryParam("timestamp") String timestamp,
