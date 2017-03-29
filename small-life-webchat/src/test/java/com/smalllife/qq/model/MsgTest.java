@@ -1,7 +1,6 @@
 package com.smalllife.qq.model;
 
 import com.smalllife.common.util.JsonUtil;
-import org.dom4j.DocumentException;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ import static com.smalllife.common.util.XMLUtil.xmlToBean;
  */
 public class MsgTest {
     @Test
-    public void parseTest() throws DocumentException, IOException {
+    public void parseTest() throws IOException {
         String xml = "<xml>" +
                 "<ToUserName>123</ToUserName>" +
                 "<FromUserName>245</FromUserName>" +
