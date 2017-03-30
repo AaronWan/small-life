@@ -29,9 +29,9 @@ public class WebchatMessageResource {
                                    @QueryParam("openid") String openId,
                                    @QueryParam("timestamp") String timestamp,
                                    @QueryParam("nonce") String nonce, @Context HttpServletRequest request) throws IOException {
-
-        TextMsg arg = XMLUtil.xmlToBean(IOUtils.toString(request.getInputStream(), "utf-8"), TextMsg.class);
-        log.info(JsonUtil.toPrettyJson(arg));
+        String temp=IOUtils.toString(request.getInputStream(), "utf-8");
+        log.info(JsonUtil.toPrettyJson(XMLUtil.xmlToBean(temp,HashMap.class));
+        TextMsg arg = XMLUtil.xmlToBean(temp, TextMsg.class);
         String msg=TextMsg.getReply(arg.getFromUserName(),arg.getToUserName(),arg.getContent());
 
         return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
