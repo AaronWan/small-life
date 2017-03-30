@@ -27,4 +27,14 @@ public class TextMsg extends BaseMsg {
     private String content;
 
 
+    public static String getReply(String fromUserName, String toUserName, String content) {
+        String msg="<xml>"+
+                "<ToUserName><![CDATA["+fromUserName+"]]></ToUserName>\n" +
+                "<FromUserName><![CDATA["+toUserName+"]]></FromUserName>\n" +
+                "<CreateTime>"+System.currentTimeMillis()+"</CreateTime>\n" +
+                "<MsgType><![CDATA[text]]></MsgType>\n" +
+                "<Content><![CDATA["+content+"]]></Content>\n" +
+                "</xml>";
+        return msg;
+    }
 }

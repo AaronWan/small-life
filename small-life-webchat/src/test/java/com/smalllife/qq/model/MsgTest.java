@@ -1,9 +1,12 @@
 package com.smalllife.qq.model;
 
 import com.smalllife.common.util.JsonUtil;
+import com.smalllife.common.util.XMLUtil;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import static com.smalllife.common.util.XMLUtil.beanToXml;
 import static com.smalllife.common.util.XMLUtil.xmlToBean;
@@ -22,10 +25,10 @@ public class MsgTest {
                 "<Content><![CDATA[欢迎开启公众号开发者模式]]></Content>\n" +
                 "<MsgId>6272960105994287618</MsgId>\n" +
                 "</xml>";
+        HashMap<String,String> arg = XMLUtil.xmlToBean(xml, HashMap.class);
         TextMsg msg=xmlToBean(xml,TextMsg.class);
         System.out.println(JsonUtil.toPrettyJson(msg));
-
-        System.out.println(beanToXml(msg));
+        System.out.println(beanToXml(msg).replaceAll(" xmlns=\"\"",""));
     }
 
 
