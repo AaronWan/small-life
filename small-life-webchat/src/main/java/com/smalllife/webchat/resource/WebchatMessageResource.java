@@ -1,7 +1,9 @@
 package com.smalllife.webchat.resource;
 
+import com.smalllife.common.util.JsonUtil;
 import com.smalllife.common.util.XMLUtil;
 import com.smalllife.qq.model.TextMsg;
+import com.sun.org.apache.xml.internal.security.utils.JavaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,7 @@ public class WebchatMessageResource {
                                    @QueryParam("nonce") String nonce, @Context HttpServletRequest request) throws IOException {
 
         TextMsg arg = XMLUtil.xmlToBean(IOUtils.toString(request.getInputStream(), "utf-8"), TextMsg.class);
+        log.info(JsonUtil.toPrettyJson(arg));
         String msg=TextMsg.getReply(arg.getFromUserName(),arg.getToUserName(),arg.getContent());
 
         return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
