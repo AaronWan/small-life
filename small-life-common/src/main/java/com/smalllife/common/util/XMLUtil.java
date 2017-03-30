@@ -1,7 +1,9 @@
 package com.smalllife.common.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +57,9 @@ public class XMLUtil {
 
     public static <T> String beanToXml(T bean) throws JsonProcessingException {
         XmlMapper xml = JacksonMapper.getXmlMapper();
+
         String string = xml.writeValueAsString(bean);
         return string;
     }
+
 }

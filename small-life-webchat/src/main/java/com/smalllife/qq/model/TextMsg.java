@@ -1,6 +1,7 @@
 package com.smalllife.qq.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
 import lombok.Data;
 
 
@@ -22,6 +23,7 @@ public class TextMsg extends BaseMsg {
      */
 
     @JsonProperty("Content")
+    @JacksonXmlCData
     private String content;
 
 
