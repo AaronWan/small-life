@@ -36,6 +36,12 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${json-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-base</artifactId>
+            <version>${json-version}</version>
+        </dependency>
     </dependencies>
 
 

@@ -11,7 +11,7 @@
     <properties>
         <jboss-resteasy.version>3.0.19.Final</jboss-resteasy.version>
         <spring-webmvc.version>4.1.6.RELEASE</spring-webmvc.version>
-        <json-version>2.5.0</json-version>
+        <json-version>2.6.3</json-version>
     </properties>
     <modules>
         <module>small-life-webchat</module>

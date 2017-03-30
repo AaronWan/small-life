@@ -57,7 +57,6 @@ public class XMLUtil {
 
     public static <T> String beanToXml(T bean) throws JsonProcessingException {
         XmlMapper xml = JacksonMapper.getXmlMapper();
-
         String string = xml.writeValueAsString(bean);
         return string;
     }
