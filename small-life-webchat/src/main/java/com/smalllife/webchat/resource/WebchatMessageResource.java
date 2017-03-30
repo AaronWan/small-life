@@ -27,12 +27,14 @@ public class WebchatMessageResource {
                                    @QueryParam("timestamp") String timestamp,
                                    @QueryParam("nonce") String nonce, @Context HttpServletRequest request) throws IOException {
         TextMsg arg = XMLUtil.xmlToBean(IOUtils.toString(request.getInputStream(), "utf-8"), TextMsg.class);
-        TextMsg result=new TextMsg();
-        result.setContent("I love you");
-        result.setCreateTime(System.currentTimeMillis());
-        result.setFromUserName(arg.getToUserName());
-        result.setToUserName(arg.getFromUserName());
-        return Response.ok(XMLUtil.beanToXml(result)).build();
+        String msg= "<xml>\n" +
+                "<ToUserName><![CDATA["+arg.getFromUserName()+"]]></ToUserName>\n" +
+                "<FromUserName><![CDATA["+arg.getToUserName()+"]]></FromUserName>\n" +
+                "<CreateTime>"+System.currentTimeMillis()+"</CreateTime>\n" +
+                "<MsgType><![CDATA[text]]></MsgType>\n" +
+                "<Content><![CDATA[I love you]]></Content>\n" +
+                "</xml>\n";
+        return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
     }
 
 }
