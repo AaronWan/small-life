@@ -30,7 +30,7 @@ public class WebchatMessageResource {
                                    @QueryParam("timestamp") String timestamp,
                                    @QueryParam("nonce") String nonce, @Context HttpServletRequest request) throws IOException {
         String temp=IOUtils.toString(request.getInputStream(), "utf-8");
-        log.info(JsonUtil.toPrettyJson(XMLUtil.xmlToBean(temp,HashMap.class));
+        log.info(JsonUtil.toPrettyJson(XMLUtil.xmlToBean(temp,HashMap.class)));
         TextMsg arg = XMLUtil.xmlToBean(temp, TextMsg.class);
         String msg=TextMsg.getReply(arg.getFromUserName(),arg.getToUserName(),arg.getContent());
 
