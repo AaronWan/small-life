@@ -28,6 +28,8 @@
             org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
         </servlet-class>
     </servlet>
+
+
     <servlet-mapping>
         <servlet-name>Resteasy</servlet-name>
         <url-pattern>/life/*</url-pattern>

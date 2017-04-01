@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
 import lombok.Data;
 
-
 /**
  * Created by Aaron on 28/03/2017.
  */
