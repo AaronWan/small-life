@@ -27,7 +27,7 @@ public class FileConfig implements IConfig {
 
     @PostConstruct
     public IConfig load() throws IOException {
-        this.content = IOUtils.toString(ConfigFactory.class.getResourceAsStream("conf" + File.separator + configName), "utf-8");
+        this.content = IOUtils.toString(ConfigFactory.class.getResourceAsStream("/conf" + File.separator + configName), "utf-8");
         this.configLine = null;
         this.configMap.clear();
         return this;
@@ -49,7 +49,7 @@ public class FileConfig implements IConfig {
 
     @Override
     public Object get(String key, Object def) {
-        if (this.configMap == null) {
+        if (this.configMap.keySet().size()==0) {
             try {
                 this.configMap.load(IOUtils.toInputStream(this.content));
             } catch (IOException e) {

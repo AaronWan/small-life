@@ -9,6 +9,6 @@ import java.io.IOException;
 public class FileConfigTest {
     @Test
     public void test() throws IOException {
-        System.out.println(new FileConfig("mongo-config").load().getContent());
+        System.out.println(new FileConfig("mongo-config").load().getString("mongo.servers",""));
     }
 }
