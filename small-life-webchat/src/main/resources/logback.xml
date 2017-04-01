@@ -30,7 +30,7 @@
     </appender>
 
 
-    <logger name="com.smalllife" level="DEBUG" additivity="false">
+    <logger name="com.smalllife.webchat.resource" level="DEBUG" additivity="false">
         <appender-ref ref="AppLog"/>
         <appender-ref ref="Error"/>
     </logger>
