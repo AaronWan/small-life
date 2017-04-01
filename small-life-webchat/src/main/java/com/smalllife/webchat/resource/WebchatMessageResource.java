@@ -12,7 +12,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Created by Aaron on 27/03/2017.
@@ -27,11 +26,16 @@ public class WebchatMessageResource {
                                    @QueryParam("openid") String openId,
                                    @QueryParam("timestamp") String timestamp,
                                    @QueryParam("nonce") String nonce, @Context HttpServletRequest request) throws IOException {
-        String temp=IOUtils.toString(request.getInputStream(), "utf-8");
-        WebChatMsg arg = XMLUtil.xmlToBean(temp, WebChatMsg.class);
-        String msg=WebChatMsg.getReply(arg);
-        log.info(msg);
-        return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
+        String temp = IOUtils.toString(request.getInputStream(), "utf-8");
+        try {
+            WebChatMsg arg = XMLUtil.xmlToBean(temp, WebChatMsg.class);
+            String msg = WebChatMsg.getReply(arg);
+            log.info(msg);
+            return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
+        } catch (Throwable e) {
+            log.error("receiveMessage:msg:{}", temp);
+            throw e;
+        }
     }
 
 }
