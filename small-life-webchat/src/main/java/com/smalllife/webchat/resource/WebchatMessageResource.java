@@ -3,7 +3,6 @@ package com.smalllife.webchat.resource;
 import com.smalllife.common.util.JsonUtil;
 import com.smalllife.common.util.XMLUtil;
 import com.smalllife.qq.model.TextMsg;
-import com.sun.org.apache.xml.internal.security.utils.JavaUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
