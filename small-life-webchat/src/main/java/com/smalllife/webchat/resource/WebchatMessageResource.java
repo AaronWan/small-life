@@ -1,6 +1,7 @@
 package com.smalllife.webchat.resource;
 
 import com.smalllife.common.util.XMLUtil;
+import com.smalllife.dao.model.CommandType;
 import com.smalllife.model.WebChatMsg;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -29,6 +30,7 @@ public class WebchatMessageResource {
         String temp = IOUtils.toString(request.getInputStream(), "utf-8");
         try {
             WebChatMsg arg = XMLUtil.xmlToBean(temp, WebChatMsg.class);
+            arg.setContent(CommandType.toCommandType());
             String msg = WebChatMsg.getReply(arg);
             log.info(msg);
             return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();

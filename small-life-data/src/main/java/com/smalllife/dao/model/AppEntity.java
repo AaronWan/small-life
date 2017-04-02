@@ -2,7 +2,6 @@ package com.smalllife.dao.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
@@ -12,20 +11,20 @@ import org.mongodb.morphia.annotations.Property;
  */
 @Setter
 @Getter
-@Entity(value = "Session", noClassnameStored = true)
-public class SessionEntity {
+@Entity(value = "App", noClassnameStored = true)
+public class AppEntity {
     @Id
-    private ObjectId id;
-    @Property(Fields.appOpenId)
-    private String appOpenId;
+    private Object id;
     @Property(Fields.openId)
     private String openId;
+    @Property(Fields.name)
+    private String name;
     @Property(Fields.createTime)
     private Long createTime;
     @Property(Fields.updateTime)
     private Long updateTime;
 
     public interface Fields {
-        String id = "_id", appId = "AI", appOpenId = "AOI",openId="OI", createTime = "CT",updateTime="UT";
+        String id = "_id", openId = "OI", name = "N", createTime = "CT", updateTime = "UT";
     }
 }

@@ -20,8 +20,8 @@ public class TagEntity {
     @Property(Fields.name)
     private String name;
     //    user id
-    @Property(Fields.openId)
-    private String openId;
+    @Property(Fields.sessionId)
+    private ObjectId sessionId;
     //    type 某一类信息
     @Property(Fields.type)
     private ContentType type;
@@ -36,7 +36,7 @@ public class TagEntity {
     private Long createTime;
 
     public interface Fields {
-        String id = "_id", name = "N", openId = "OI", type = "T", recordCount = "RC", createTime = "CT", modifyTime = "MT";
+        String id = "_id", name = "N", sessionId = "SId", type = "T", recordCount = "RC", createTime = "CT", modifyTime = "MT";
     }
 
 }
