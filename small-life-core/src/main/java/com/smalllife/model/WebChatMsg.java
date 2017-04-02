@@ -110,6 +110,6 @@ public class WebChatMsg {
         if (!Strings.isNullOrEmpty(arg.picUrl))
             msg.append("<PicUrl><![CDATA[" + arg.picUrl + "]]></PicUrl>\n");
         msg.append("</xml>");
-        return msg;
+        return msg.toString();
     }
 }
