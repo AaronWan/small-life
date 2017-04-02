@@ -1,8 +1,7 @@
-package com.smalllife.qq.model;
+package com.smalllife.model;
 
 import com.smalllife.common.util.JsonUtil;
 import com.smalllife.common.util.XMLUtil;
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import java.io.IOException;

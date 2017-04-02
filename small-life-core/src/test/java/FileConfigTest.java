@@ -1,4 +1,4 @@
-import com.smalllife.mongosupport.FileConfig;
+import com.smalllife.common.util.config.FileConfig;
 import org.junit.Test;
 
 import java.io.IOException;

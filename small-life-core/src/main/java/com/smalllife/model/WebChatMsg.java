@@ -1,4 +1,4 @@
-package com.smalllife.qq.model;
+package com.smalllife.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -41,7 +41,7 @@ public class WebChatMsg {
     @JsonProperty("Description")
     @JacksonXmlCData
     private String description;
-//video
+    //video
     @JsonProperty("ThumbMediaId")
     @JacksonXmlCData
     private String thumbMediaId;
@@ -50,9 +50,13 @@ public class WebChatMsg {
     @JsonProperty("MediaId")
     @JacksonXmlCData
     private String mediaId;
-
-
-//    location
+    @JsonProperty("Format")
+    @JacksonXmlCData
+    private String format;
+    @JsonProperty("Recognition")
+    @JacksonXmlCData
+    private String recognition;
+    //    location
     @JsonProperty("Location_X")
     @JacksonXmlCData
     private String location_X;
@@ -66,28 +70,33 @@ public class WebChatMsg {
     @JacksonXmlCData
     private String label;
 
-//image
+    //image
     @JsonProperty("PicUrl")
     @JacksonXmlCData
     private String picUrl;
 
+    //    event
+    @JsonProperty("Event")
+    @JacksonXmlCData
+    private EventType event;
+
     public static String getReply(WebChatMsg arg) {
-        String msg="<xml>"+
-                "<ToUserName><![CDATA["+arg.fromUserName+"]]></ToUserName>\n" +
-                "<FromUserName><![CDATA["+arg.toUserName+"]]></FromUserName>\n" +
-                "<CreateTime>"+System.currentTimeMillis()+"</CreateTime>\n" +
-                "<MsgType><![CDATA["+arg.getType()+"]]></MsgType>\n" +
-                "<Content><![CDATA["+arg.content+"]]></Content>\n" +
-                "<Url><![CDATA["+arg.url+"]]></Content>\n" +
-                "<Title><![CDATA["+arg.title+"]]></Content>\n" +
-                "<Description><![CDATA["+arg.description+"]]></Content>\n" +
-                "<ThumbMediaId><![CDATA["+arg.thumbMediaId+"]]></Content>\n" +
-                "<MediaId><![CDATA["+arg.mediaId+"]]></Content>\n" +
-                "<Location_X><![CDATA["+arg.location_X+"]]></Content>\n" +
-                "<Location_Y><![CDATA["+arg.location_Y+"]]></Content>\n" +
-                "<Scale><![CDATA["+arg.scale+"]]></Content>\n" +
-                "<Label><![CDATA["+arg.label+"]]></Content>\n" +
-                "<PicUrl><![CDATA["+arg.picUrl+"]]></Content>\n" +
+        String msg = "<xml>" +
+                "<ToUserName><![CDATA[" + arg.fromUserName + "]]></ToUserName>\n" +
+                "<FromUserName><![CDATA[" + arg.toUserName + "]]></FromUserName>\n" +
+                "<CreateTime>" + System.currentTimeMillis() + "</CreateTime>\n" +
+                "<MsgType><![CDATA[" + arg.getType() + "]]></MsgType>\n" +
+                "<Content><![CDATA[" + arg.content + "]]></Content>\n" +
+                "<Url><![CDATA[" + arg.url + "]]></Content>\n" +
+                "<Title><![CDATA[" + arg.title + "]]></Content>\n" +
+                "<Description><![CDATA[" + arg.description + "]]></Content>\n" +
+                "<ThumbMediaId><![CDATA[" + arg.thumbMediaId + "]]></Content>\n" +
+                "<MediaId><![CDATA[" + arg.mediaId + "]]></Content>\n" +
+                "<Location_X><![CDATA[" + arg.location_X + "]]></Content>\n" +
+                "<Location_Y><![CDATA[" + arg.location_Y + "]]></Content>\n" +
+                "<Scale><![CDATA[" + arg.scale + "]]></Content>\n" +
+                "<Label><![CDATA[" + arg.label + "]]></Content>\n" +
+                "<PicUrl><![CDATA[" + arg.picUrl + "]]></Content>\n" +
                 "</xml>";
         return msg;
     }

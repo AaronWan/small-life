@@ -1,10 +1,12 @@
-package com.smalllife.mongosupport;
+package com.smalllife.common.mongo.mongosupport;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.reflect.Reflection;
 import com.mongodb.*;
+import com.smalllife.common.util.config.ConfigFactory;
+import com.smalllife.common.util.config.IConfig;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.mapping.MapperOptions;

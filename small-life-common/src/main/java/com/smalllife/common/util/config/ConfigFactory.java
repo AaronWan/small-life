@@ -1,4 +1,4 @@
-package com.smalllife.mongosupport;
+package com.smalllife.common.util.config;
 
 
 import lombok.Data;

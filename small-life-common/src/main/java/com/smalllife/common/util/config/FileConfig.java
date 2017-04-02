@@ -1,4 +1,4 @@
-package com.smalllife.mongosupport;
+package com.smalllife.common.util.config;
 
 import com.smalllife.common.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;

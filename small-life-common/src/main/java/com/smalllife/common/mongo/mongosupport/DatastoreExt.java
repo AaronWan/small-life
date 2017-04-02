@@ -1,4 +1,4 @@
-package com.smalllife.mongosupport;
+package com.smalllife.common.mongo.mongosupport;
 
 import org.mongodb.morphia.AdvancedDatastore;
 /**
