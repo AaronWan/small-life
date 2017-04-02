@@ -25,7 +25,7 @@ public class MsgTest {
                 "<MsgId>6272960105994287618</MsgId>\n" +
                 "</xml>";
         HashMap<String,String> arg = XMLUtil.xmlToBean(xml, HashMap.class);
-        TextMsg msg=xmlToBean(xml,TextMsg.class);
+        WebChatMsg msg=xmlToBean(xml,WebChatMsg.class);
         System.out.println(JsonUtil.toPrettyJson(msg));
         System.out.println(beanToXml(msg).replaceAll(" xmlns=\"\"",""));
     }
