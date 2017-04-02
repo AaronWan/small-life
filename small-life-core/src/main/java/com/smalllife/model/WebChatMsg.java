@@ -3,6 +3,7 @@ package com.smalllife.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
+import com.google.common.base.Strings;
 import lombok.Data;
 
 
@@ -81,23 +82,34 @@ public class WebChatMsg {
     private EventType event;
 
     public static String getReply(WebChatMsg arg) {
-        String msg = "<xml>" +
+        StringBuffer msg = new StringBuffer("<xml>" +
                 "<ToUserName><![CDATA[" + arg.fromUserName + "]]></ToUserName>\n" +
                 "<FromUserName><![CDATA[" + arg.toUserName + "]]></FromUserName>\n" +
                 "<CreateTime>" + System.currentTimeMillis() + "</CreateTime>\n" +
-                "<MsgType><![CDATA[" + arg.getType() + "]]></MsgType>\n" +
-                "<Content><![CDATA[" + arg.content + "]]></Content>\n" +
-                "<Url><![CDATA[" + arg.url + "]]></Content>\n" +
-                "<Title><![CDATA[" + arg.title + "]]></Content>\n" +
-                "<Description><![CDATA[" + arg.description + "]]></Content>\n" +
-                "<ThumbMediaId><![CDATA[" + arg.thumbMediaId + "]]></Content>\n" +
-                "<MediaId><![CDATA[" + arg.mediaId + "]]></Content>\n" +
-                "<Location_X><![CDATA[" + arg.location_X + "]]></Content>\n" +
-                "<Location_Y><![CDATA[" + arg.location_Y + "]]></Content>\n" +
-                "<Scale><![CDATA[" + arg.scale + "]]></Content>\n" +
-                "<Label><![CDATA[" + arg.label + "]]></Content>\n" +
-                "<PicUrl><![CDATA[" + arg.picUrl + "]]></Content>\n" +
-                "</xml>";
+                "<MsgType><![CDATA[" + arg.getType() + "]]></MsgType>\n");
+        if (!Strings.isNullOrEmpty(arg.content))
+            msg.append("<Content><![CDATA[" + arg.content + "]]></Content>\n");
+        if (!Strings.isNullOrEmpty(arg.url))
+            msg.append("<Url><![CDATA[" + arg.url + "]]></Url>\n");
+        if (!Strings.isNullOrEmpty(arg.title))
+            msg.append("<Title><![CDATA[" + arg.title + "]]></Title>\n");
+        if (!Strings.isNullOrEmpty(arg.description))
+            msg.append("<Description><![CDATA[" + arg.description + "]]></Description>\n");
+        if (!Strings.isNullOrEmpty(arg.thumbMediaId))
+            msg.append("<ThumbMediaId><![CDATA[" + arg.thumbMediaId + "]]></ThumbMediaId>\n");
+        if (!Strings.isNullOrEmpty(arg.mediaId))
+            msg.append("<MediaId><![CDATA[" + arg.mediaId + "]]></MediaId>\n");
+        if (!Strings.isNullOrEmpty(arg.location_X))
+            msg.append("<Location_X><![CDATA[" + arg.location_X + "]]></Location_X>\n");
+        if (!Strings.isNullOrEmpty(arg.location_Y))
+            msg.append("<Location_Y><![CDATA[" + arg.location_Y + "]]></Location_Y>\n");
+        if (!Strings.isNullOrEmpty(arg.scale))
+            msg.append("<Scale><![CDATA[" + arg.scale + "]]></Scale>\n");
+        if (!Strings.isNullOrEmpty(arg.label))
+            msg.append("<Label><![CDATA[" + arg.label + "]]></Label>\n");
+        if (!Strings.isNullOrEmpty(arg.picUrl))
+            msg.append("<PicUrl><![CDATA[" + arg.picUrl + "]]></PicUrl>\n");
+        msg.append("</xml>");
         return msg;
     }
 }
