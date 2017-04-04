@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlCData;
 import com.google.common.base.Strings;
+import com.smalllife.dao.model.SessionEntity;
 import lombok.Data;
 
 
@@ -113,7 +114,20 @@ public class WebChatMsg {
         return msg.toString();
     }
 
-    @Override
+    public static String getTextMsg(SessionEntity sessionEntity, String content) {
+        StringBuffer msg = new StringBuffer("<xml>" +
+                "<ToUserName><![CDATA[" + sessionEntity.getOpenId() + "]]></ToUserName>\n" +
+                "<FromUserName><![CDATA[" + sessionEntity.getAppOpenId() + "]]></FromUserName>\n" +
+                "<CreateTime>" + System.currentTimeMillis() + "</CreateTime>\n" +
+                "<MsgType><![CDATA[text]]></MsgType>\n");
+        if (!Strings.isNullOrEmpty(content))
+            msg.append("<Content><![CDATA[" + content + "]]></Content>\n");
+        msg.append("</xml>");
+        return msg.toString();
+    }
+
+
+        @Override
     public String toString() {
         return "WebChatMsg{" +
                 "toUserName='" + toUserName + '\'' +

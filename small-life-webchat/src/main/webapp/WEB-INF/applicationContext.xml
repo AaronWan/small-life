@@ -10,7 +10,7 @@
 
     <import resource="classpath:spring/fs-bpm-data.xml"/>
 
-    <context:component-scan base-package="com.smalllife.webchat.resource"/>
+    <context:component-scan base-package="com.smalllife"/>
     <context:annotation-config/>
 
 </beans>

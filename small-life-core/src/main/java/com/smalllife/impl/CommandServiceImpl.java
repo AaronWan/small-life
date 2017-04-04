@@ -30,31 +30,31 @@ public class CommandServiceImpl implements CommandService {
     private SessionService sessionService;
 
     @Override
-    public void processCommand(WebChatMsg msg) {
+    public String processCommand(WebChatMsg msg) {
         log.debug("processCommand:{}", msg);
         SessionEntity sessionEntity = sessionService.getSession(msg.getToUserName(), msg.getFromUserName());
         CommandEntity commandEntity = commandDao.find(sessionEntity.getId());
         WebchatContentType type = msg.getType();
         if (commandEntity == null) {
             if (!type.equals(WebchatContentType.text)) {
-                msgService.sendTextMsg(sessionEntity, CommandType.toCommandType());
+                return WebChatMsg.getTextMsg(sessionEntity, CommandType.toCommandType());
             } else {
-                CommandType commandType = null;
+                CommandType commandType;
                 try {
                     commandType = CommandType.getCommand(msg.getContent());
                     if (commandType == null) {
-                        msgService.sendTextMsg(sessionEntity, CommandType.toCommandType());
+                        return WebChatMsg.getTextMsg(sessionEntity,  CommandType.toCommandType());
                     } else {
                         commandDao.save(sessionEntity.getId(), commandType);
-                        msgService.sendTextMsg(sessionEntity,"您选择了"+commandType.name()+"，请输入内容～+～");
+                        return WebChatMsg.getTextMsg(sessionEntity,"您选择了"+commandType.name()+"，请输入内容～+～");
                     }
                 } catch (Throwable e) {
                     log.error("processCommand", e);
-                    msgService.sendTextMsg(sessionEntity, CommandType.toCommandType());
+                    return WebChatMsg.getTextMsg(sessionEntity, CommandType.toCommandType());
                 }
             }
         }else{
-
+            return WebChatMsg.getTextMsg(sessionEntity, "未开发，谢谢关注");
         }
     }
 

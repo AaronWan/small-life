@@ -1,10 +1,12 @@
 package com.smalllife.webchat.resource;
 
+import com.smalllife.CommandService;
 import com.smalllife.common.util.XMLUtil;
 import com.smalllife.dao.model.CommandType;
 import com.smalllife.model.WebChatMsg;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,8 @@ import java.io.IOException;
 @Path("/webchat")
 @Slf4j
 public class WebchatMessageResource {
+    @Autowired
+    private CommandService commandService;
     @Path("/")
     @POST
     public Response receiveMessage(@QueryParam("signature") String signature,
@@ -31,7 +35,7 @@ public class WebchatMessageResource {
         try {
             WebChatMsg arg = XMLUtil.xmlToBean(temp, WebChatMsg.class);
             arg.setContent(CommandType.toCommandType());
-            String msg = WebChatMsg.getReply(arg);
+            String msg = commandService.processCommand(arg);
             log.info(msg);
             return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
         } catch (Throwable e) {
