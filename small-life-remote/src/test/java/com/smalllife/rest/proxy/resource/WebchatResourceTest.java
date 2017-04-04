@@ -49,12 +49,12 @@ public class WebchatResourceTest extends BaseTest {
 //</xml>
     @Test
     public void sendTextMessage() throws Exception {
-        Map<String, String> params = Maps.newHashMap();
-        params.put("access_token", accessToken().getAccessToken());
-        TextMsg msg=new TextMsg();
-        msg.setTouser("oHcnvt3Qc0jzw4Tqr1YCaFzkJInc");
-        msg.setText("text ........");
-        SendTextMessage.Result result = webchatResource.sendTextMessage(params,msg);
-        System.out.println(JsonUtil.toPrettyJson(result));
+//        Map<String, String> params = Maps.newHashMap();
+//        params.put("access_token", accessToken().getAccessToken());
+//        TextMsg msg=new TextMsg();
+//        msg.setTouser("oHcnvt3Qc0jzw4Tqr1YCaFzkJInc");
+//        msg.setText("text ........");
+//        SendTextMessage.Result result = webchatResource.sendTextMessage(params,msg);
+//        System.out.println(JsonUtil.toPrettyJson(result));
     }
 }
