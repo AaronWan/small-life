@@ -28,6 +28,7 @@
         <module>small-life-common</module>
         <module>small-life-core</module>
         <module>small-life-data</module>
+        <module>small-life-remote</module>
     </modules>
     <build>
         <plugins>

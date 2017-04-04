@@ -1,18 +1,16 @@
 package com.smalllife;
 
-import com.smalllife.model.WebChatMsg;
+
+import com.smalllife.dao.model.SessionEntity;
 
 /**
  * Created by Aaron on 01/04/2017.
  */
 public interface WebChatMsgService {
-    void sendTextMsg(String openId, String text);
+    void sendTextMsg(SessionEntity session, String text);
 
-    void sendImageMsg(String openId, byte[] datas);
+    void sendImageMsg(SessionEntity session, byte[] datas);
 
-    void sendVideoMsg(String openId, byte[] datas);
-
-
-
+    void sendVideoMsg(SessionEntity session, byte[] datas);
 
 }

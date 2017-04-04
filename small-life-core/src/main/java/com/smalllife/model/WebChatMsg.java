@@ -112,4 +112,29 @@ public class WebChatMsg {
         msg.append("</xml>");
         return msg.toString();
     }
+
+    @Override
+    public String toString() {
+        return "WebChatMsg{" +
+                "toUserName='" + toUserName + '\'' +
+                ", fromUserName='" + fromUserName + '\'' +
+                ", createTime=" + createTime +
+                ", type=" + type +
+                ", msgId=" + msgId +
+                ", content='" + content + '\'' +
+                ", url='" + url + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", thumbMediaId='" + thumbMediaId + '\'' +
+                ", mediaId='" + mediaId + '\'' +
+                ", format='" + format + '\'' +
+                ", recognition='" + recognition + '\'' +
+                ", location_X='" + location_X + '\'' +
+                ", location_Y='" + location_Y + '\'' +
+                ", scale='" + scale + '\'' +
+                ", label='" + label + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                ", event=" + event +
+                '}';
+    }
 }

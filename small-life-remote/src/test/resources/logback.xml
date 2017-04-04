@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="AppLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.home}/logs/smalllife.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.home}/logs/smalllife.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{12} %X{traceId} %X{id} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="Error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <file>${catalina.home}/logs/error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.home}/logs/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{12} %X{traceId} %X{userId} %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="com.smalllife.webchat.resource" level="DEBUG" additivity="false">
+        <appender-ref ref="AppLog"/>
+        <appender-ref ref="Error"/>
+    </logger>
+
+    <root level="WARN">
+        <appender-ref ref="AppLog"/>
+    </root>
+
+</configuration>

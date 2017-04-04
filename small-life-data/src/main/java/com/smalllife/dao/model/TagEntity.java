@@ -16,6 +16,9 @@ import org.mongodb.morphia.annotations.Property;
 public class TagEntity {
     @Id
     private ObjectId id;
+    //tagId
+    @Property(Fields.tagId)
+    private Long tagId;
     //tag name
     @Property(Fields.name)
     private String name;
@@ -36,7 +39,7 @@ public class TagEntity {
     private Long createTime;
 
     public interface Fields {
-        String id = "_id", name = "N", sessionId = "SId", type = "T", recordCount = "RC", createTime = "CT", modifyTime = "MT";
+        String id = "_id", name = "N", sessionId = "SId", type = "T",tagId="Tid", recordCount = "RC", createTime = "CT", modifyTime = "MT";
     }
 
 }

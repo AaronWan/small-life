@@ -1,0 +1,8 @@
+{
+  "Webchat": {
+    "address":"https://api.weixin.qq.com/cgi-bin",
+    "serviceName":"微信接口",
+    "socketTimeOut": 100000,
+    "connectionTimeOut": 2000
+  }
+}

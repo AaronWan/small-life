@@ -38,7 +38,16 @@ public enum CommandType {
         return id +
                 "--->" + name;
     }
-
+    public static CommandType getCommand(String command){
+        int id=Integer.valueOf(command);
+        for (int i = 0; i < values().length; i++) {
+            CommandType temp = values()[i];
+            if(temp.id==id){
+                return temp;
+            }
+        }
+        return null;
+    }
     public static void main(String[] args) {
         System.out.println(toCommandType());
     }

@@ -23,9 +23,13 @@ public class FileConfig implements IConfig {
 
     public FileConfig(String configName) {
         this.configName = configName;
+        try {
+            load();
+        } catch (IOException e) {
+            log.error("FileConfig:",e);
+        }
     }
 
-    @PostConstruct
     public IConfig load() throws IOException {
         this.content = IOUtils.toString(ConfigFactory.class.getResourceAsStream("/conf" + File.separator + configName), "utf-8");
         this.configLine = null;
