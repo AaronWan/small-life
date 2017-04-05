@@ -44,6 +44,10 @@ public class CommandServiceImpl implements CommandService {
         CommandEntity commandEntity = commandDao.find(sessionEntity.getId());
         log.debug("command:{}",JsonUtil.toJson(commandEntity));
         WebchatContentType type = msg.getType();
+        if(msg.getContent().equals("0")||msg.getContent().toLowerCase().equals(CommandType.Reset.name().toLowerCase())){
+            commandDao.delete(sessionEntity.getId());
+            return WebChatMsg.getTextMsg(sessionEntity, commandEntity.getCommand().getName()+"命令已清除");
+        }
         if (commandEntity == null) {
             if (!type.equals(WebchatContentType.text)) {
                 return WebChatMsg.getTextMsg(sessionEntity, CommandType.toCommandType());
