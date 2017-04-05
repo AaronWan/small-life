@@ -3,6 +3,6 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd ">
-
-
+    <bean id="datastore" class="com.smalllife.common.mongo.mongosupport.MongoDataStoreFactoryBean"
+          p:configName="mongo-config"/>
 </beans>
