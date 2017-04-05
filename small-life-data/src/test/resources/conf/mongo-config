@@ -1,5 +1,5 @@
-mongo.servers=mongodb://127.0.0.1:27017
-mongo.dbName=smallLife
+mongo.servers=mongodb://47.92.38.71:27017
+mongo.dbName=SL
 mongo.mapPackage=com.smalllife.dao.model
 mongo.ignoreInvalidClasses=true
 mongo.storeEmpties=false
