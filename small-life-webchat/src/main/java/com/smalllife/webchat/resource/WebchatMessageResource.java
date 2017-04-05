@@ -25,6 +25,7 @@ import java.io.IOException;
 public class WebchatMessageResource {
     @Autowired
     private CommandService commandService;
+
     @Path("/")
     @POST
     public Response receiveMessage(@QueryParam("signature") String signature,
@@ -34,7 +35,13 @@ public class WebchatMessageResource {
         String temp = IOUtils.toString(request.getInputStream(), "utf-8");
         try {
             WebChatMsg arg = XMLUtil.xmlToBean(temp, WebChatMsg.class);
-            String msg = commandService.processCommand(arg);
+            String msg = "";
+            try {
+                msg = commandService.processCommand(arg);
+            } catch (Throwable e) {
+                log.error("error",e);
+                msg = e.getMessage();
+            }
             log.info(msg);
             return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
         } catch (Throwable e) {
