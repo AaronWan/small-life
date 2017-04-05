@@ -59,4 +59,12 @@ public class TagDaoImpl extends AbstractDao<TagEntity> implements TagDao {
         query.field(TagEntity.Fields.tagId).equal(tagId);
         datastore.delete(query);
     }
+
+    @Override
+    public TagEntity finTag(ObjectId sessionId, long tagId) {
+        Query<TagEntity> query=createQuery();
+        query.field(TagEntity.Fields.sessionId).equal(sessionId);
+        query.field(TagEntity.Fields.tagId).equal(tagId);
+        return query.get();
+    }
 }

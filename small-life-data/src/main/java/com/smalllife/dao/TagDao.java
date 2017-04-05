@@ -19,4 +19,5 @@ public interface TagDao {
 
     void delete(ObjectId sessionId,Long tagId);
 
+    TagEntity finTag(ObjectId sessionId, long tagId);
 }

@@ -5,13 +5,15 @@ package com.smalllife.dao.model;
  * Created by Aaron on 02/04/2017.
  */
 public enum CommandType {
-    AddRecord(1, "添加记录"), AddTag(2, "添加标签"), AllTag(3, "查看现有标签"), TagContent(4, "查看标签内容");
+    AddRecord(1, "添加记录","tagId|content"), AddTag(2, "添加标签","tagName|tagType"), AllTag(3, "查看现有标签",""), TagContent(4, "查看标签内容","tagId");
     private int id;
     private String name;
+    private String rule;
 
-    CommandType(int id, String name) {
+    CommandType(int id, String name,String rule) {
         this.id = id;
         this.name = name;
+        this.rule=rule;
     }
 
     public void setId(int id) {
@@ -21,6 +23,19 @@ public enum CommandType {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRule() {
+        return rule;
+    }
+
+    public void setRule(String rule) {
+        this.rule = rule;
+    }
+
     public static String toCommandType(){
         CommandType[] types=CommandType.values();
         StringBuffer sb=new StringBuffer();
@@ -36,7 +51,7 @@ public enum CommandType {
     @Override
     public String toString() {
         return id +
-                "--->" + name;
+                "--->" + name+"-->"+rule;
     }
     public static CommandType getCommand(String command){
         int id=Integer.valueOf(command);
