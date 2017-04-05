@@ -56,7 +56,7 @@ public class CommandServiceImpl implements CommandService {
                     if (commandType == null) {
                         return WebChatMsg.getTextMsg(sessionEntity,  CommandType.toCommandType());
                     } else {
-                        if(commandType==CommandType.AllTag){
+                        if(commandType.equals(CommandType.AllTag)){
                             return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
                         }
                         commandDao.save(sessionEntity.getId(), commandType);
