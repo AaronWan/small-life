@@ -14,7 +14,7 @@ import org.mongodb.morphia.annotations.Property;
 @Entity(value = "App", noClassnameStored = true)
 public class AppEntity {
     @Id
-    private Object id;
+    private ObjectId id;
     @Property(Fields.openId)
     private String openId;
     @Property(Fields.name)
