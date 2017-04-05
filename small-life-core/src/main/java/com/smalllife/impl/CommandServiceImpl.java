@@ -42,6 +42,7 @@ public class CommandServiceImpl implements CommandService {
         log.debug("processCommand:{}", msg);
         SessionEntity sessionEntity = sessionService.getSession(msg.getToUserName(), msg.getFromUserName());
         CommandEntity commandEntity = commandDao.find(sessionEntity.getId());
+        log.debug("command:{}",JsonUtil.toJson(commandEntity));
         WebchatContentType type = msg.getType();
         if (commandEntity == null) {
             if (!type.equals(WebchatContentType.text)) {
