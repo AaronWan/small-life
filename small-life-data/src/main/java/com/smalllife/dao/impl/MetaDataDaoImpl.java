@@ -18,7 +18,7 @@ public class MetaDataDaoImpl extends AbstractDao<MetaEntity> implements MetaData
         query.field(MetaEntity.Fields.name).equal("Tag_" + sessionId);
         UpdateOperations operation = createUpdateOperations();
         operation.inc(MetaEntity.Fields.number);
-        return datastore.findAndModify(query, operation).getNumber();
+        return datastore.findAndModify(query, operation,false,true).getNumber();
     }
 
     @Override
@@ -27,6 +27,6 @@ public class MetaDataDaoImpl extends AbstractDao<MetaEntity> implements MetaData
         query.field(MetaEntity.Fields.name).equal("Record_" + sessionId);
         UpdateOperations operation = createUpdateOperations();
         operation.inc(MetaEntity.Fields.number);
-        return datastore.findAndModify(query, operation).getNumber();
+        return datastore.findAndModify(query, operation,false,true).getNumber();
     }
 }
