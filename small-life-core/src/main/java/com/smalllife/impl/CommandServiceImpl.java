@@ -56,6 +56,9 @@ public class CommandServiceImpl implements CommandService {
                     if (commandType == null) {
                         return WebChatMsg.getTextMsg(sessionEntity,  CommandType.toCommandType());
                     } else {
+                        if(commandType==CommandType.AllTag){
+                            return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
+                        }
                         commandDao.save(sessionEntity.getId(), commandType);
                         return WebChatMsg.getTextMsg(sessionEntity,"您选择了"+commandType.getName()+"，请输入内容～+～");
                     }
@@ -73,8 +76,6 @@ public class CommandServiceImpl implements CommandService {
                 }else{
                     return WebChatMsg.getTextMsg(sessionEntity, "Tag 格式错误");
                 }
-            }else if(commandEntity.getCommand().equals(CommandType.AllTag)){
-                return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
             }else if(commandEntity.getCommand().equals(CommandType.AddRecord)){
                 String[] content=msg.getContent().split(";");
                 Long tagId=Long.valueOf(content[0]);
