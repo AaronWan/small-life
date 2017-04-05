@@ -68,7 +68,7 @@ public class CommandServiceImpl implements CommandService {
             }
         }else{
             if(commandEntity.getCommand().equals(CommandType.AddTag)){
-                String[] tag=msg.getContent().split("|");
+                String[] tag=msg.getContent().split(",");
                 if (tag.length == 2) {
                     tagService.save(sessionEntity, tag[0], ContentType.valueOf(tag[1]));
                     return WebChatMsg.getTextMsg(sessionEntity, "Tag保存成功");

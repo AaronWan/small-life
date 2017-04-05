@@ -1,11 +1,13 @@
 package com.smalllife.dao.model;
 
 
+import com.google.common.base.Strings;
+
 /**
  * Created by Aaron on 02/04/2017.
  */
 public enum CommandType {
-    AddRecord(1, "添加记录","tagId|content"), AddTag(2, "添加标签","tagName|tagType"), AllTag(3, "查看现有标签",""), TagContent(4, "查看标签内容","tagId"), Reset(0,"重置" ,"" );
+    AddRecord(1, "添加记录","tagId;content"), AddTag(2, "添加标签","tagName;tagType"), AllTag(3, "查看现有标签",""), TagContent(4, "查看标签内容","tagId"), Reset(0,"重置" ,"" );
     private int id;
     private String name;
     private String rule;
@@ -50,6 +52,10 @@ public enum CommandType {
 
     @Override
     public String toString() {
+        if(Strings.isNullOrEmpty(rule)){
+        return id +
+                "--->" + name;
+        }
         return id +
                 "--->" + name+"-->"+rule;
     }
