@@ -1,22 +1,18 @@
 package com.smalllife.impl;
 
-import com.smalllife.CommandService;
-import com.smalllife.TagService;
-import com.smalllife.WebChatEventService;
-import com.smalllife.WebChatMsgService;
+import com.smalllife.*;
 import com.smalllife.common.util.JsonUtil;
 import com.smalllife.dao.CommandDao;
 import com.smalllife.dao.SessionService;
-import com.smalllife.dao.model.CommandEntity;
-import com.smalllife.dao.model.CommandType;
-import com.smalllife.dao.model.ContentType;
-import com.smalllife.dao.model.SessionEntity;
+import com.smalllife.dao.model.*;
 import com.smalllife.model.WebChatMsg;
 import com.smalllife.model.WebchatContentType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -29,6 +25,8 @@ public class CommandServiceImpl implements CommandService {
     private WebChatEventService eventService;
     @Autowired
     private WebChatMsgService msgService;
+    @Autowired
+    private RecordService recordService;
     @Autowired
     private CommandDao commandDao;
     @Autowired
@@ -77,6 +75,25 @@ public class CommandServiceImpl implements CommandService {
                 }
             }else if(commandEntity.getCommand().equals(CommandType.AllTag)){
                 return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
+            }else if(commandEntity.getCommand().equals(CommandType.AddRecord)){
+                String[] content=msg.getContent().split(";");
+                Long tagId=Long.valueOf(content[0]);
+                TagEntity tagEntity=tagService.get(sessionEntity,tagId);
+                RecordEntity entity;
+                if(tagEntity.getType().equals(ContentType.date)){
+                    entity = recordService.create(sessionEntity, tagId, new Date());
+                }else{
+                    entity=recordService.create(sessionEntity,tagId,msg);
+                }
+                return WebChatMsg.getTextMsg(sessionEntity, "保存成功:"+entity.getId());
+            }else if(commandEntity.getCommand().equals(CommandType.TagContent)){
+                Long tagId=Long.valueOf(msg.getContent());
+                List<RecordEntity> tagEntity=recordService.list(sessionEntity,tagId);
+                return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagEntity.stream().map(item->{
+                    item.setId(null);
+                    item.setSessionId(null);
+                    return item;
+                }).collect(Collectors.toList())));
             }
             return WebChatMsg.getTextMsg(sessionEntity, "未开发，谢谢关注");
         }

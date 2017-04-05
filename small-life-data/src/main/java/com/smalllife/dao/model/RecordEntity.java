@@ -16,10 +16,10 @@ import org.mongodb.morphia.annotations.Property;
 @Entity(value = "Record", noClassnameStored = true)
 public class RecordEntity {
     @Id
-    private ObjectId id;
+    private Long id;
 
     @Property(Fields.tagId)
-    private ObjectId tagId;
+    private Long tagId;
 
     @Property(Fields.sessionId)
     private ObjectId sessionId;
