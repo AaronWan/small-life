@@ -2,6 +2,7 @@ package com.smalllife.dao.model;
 
 
 import com.google.common.base.Strings;
+import com.google.common.util.concurrent.Runnables;
 
 /**
  * Created by Aaron on 02/04/2017.
@@ -60,12 +61,15 @@ public enum CommandType {
                 "--->" + name+"-->"+rule;
     }
     public static CommandType getCommand(String command){
+        try{
         int id=Integer.valueOf(command);
         for (int i = 0; i < values().length; i++) {
             CommandType temp = values()[i];
             if(temp.id==id){
                 return temp;
             }
+        }}catch (RuntimeException e){
+
         }
         return null;
     }
