@@ -34,7 +34,6 @@ public class WebchatMessageResource {
         String temp = IOUtils.toString(request.getInputStream(), "utf-8");
         try {
             WebChatMsg arg = XMLUtil.xmlToBean(temp, WebChatMsg.class);
-            arg.setContent(CommandType.toCommandType());
             String msg = commandService.processCommand(arg);
             log.info(msg);
             return Response.ok(msg).type(MediaType.APPLICATION_XML_TYPE).encoding("utf-8").build();
