@@ -91,7 +91,7 @@ public class CommandServiceImpl implements CommandService {
                 if(tagEntity.getType().equals(ContentType.date)){
                     entity = recordService.create(sessionEntity, tagId, new Date());
                 }else{
-                    entity=recordService.create(sessionEntity,tagId,msg);
+                    entity=recordService.create(sessionEntity,tagId,msg.getContent());
                 }
                 return WebChatMsg.getTextMsg(sessionEntity, "第"+entity.getId()+"条记录保存成功，您可以继续添加或0退出");
             }else if(commandEntity.getCommand().equals(CommandType.TagContent)){
