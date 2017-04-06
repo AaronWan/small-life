@@ -13,4 +13,6 @@ public interface CommandDao {
     void delete(ObjectId sessionId);
 
     CommandEntity save(ObjectId sessionId, CommandType type);
+
+    CommandEntity save(ObjectId id, CommandType addRecord, String s);
 }

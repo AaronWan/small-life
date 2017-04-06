@@ -5,4 +5,12 @@ package com.smalllife.dao.model;
  */
 public enum ContentType {
     text,date,number;
+
+    public static ContentType getValueOf(String type){
+        try{
+            return valueOf(type);
+        }catch (RuntimeException e){
+            return text;
+        }
+    }
 }

@@ -27,11 +27,13 @@ public class CommandEntity {
     private ObjectId sessionId;
     @Property(Fields.command)
     private CommandType command;
+    @Property(Fields.content)
+    private String content;
     @Property(Fields.date)
     private Date date;
 
     public interface Fields{
-        String id="_id",sessionId="SId",command="C",date="D";
+        String id="_id",sessionId="SId",command="C",content="content",date="D";
     }
 
 }

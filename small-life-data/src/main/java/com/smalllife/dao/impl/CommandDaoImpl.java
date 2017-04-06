@@ -38,4 +38,16 @@ public class CommandDaoImpl extends AbstractDao<CommandEntity> implements Comman
         operations.set(CommandEntity.Fields.date, new Date());
         return datastore.findAndModify(query, operations, false, true);
     }
+
+    @Override
+    public CommandEntity save(ObjectId sessionId, CommandType type,String content) {
+        Query<CommandEntity> query = createQuery();
+        query.field(CommandEntity.Fields.sessionId).equal(sessionId);
+        UpdateOperations operations = createUpdateOperations();
+        operations.set(CommandEntity.Fields.command, type);
+        operations.set(CommandEntity.Fields.content, content);
+        operations.set(CommandEntity.Fields.date, new Date());
+        return datastore.findAndModify(query, operations, false, true);
+    }
+
 }

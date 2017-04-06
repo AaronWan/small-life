@@ -33,7 +33,7 @@ public class RecordDaoImpl extends AbstractDao<RecordEntity> implements RecordDa
     public List<RecordEntity> list(ObjectId sessionId, Long tagId) {
         Query<RecordEntity> query = createQuery();
         query.field(RecordEntity.Fields.sessionId).equal(sessionId);
-        if(tagId==null)
+        if(tagId!=null)
             query.field(RecordEntity.Fields.tagId).equal(tagId);
         return query.asList();
     }
