@@ -5,6 +5,7 @@ import com.smalllife.common.util.JsonUtil;
 import com.smalllife.dao.CommandDao;
 import com.smalllife.dao.SessionService;
 import com.smalllife.dao.model.*;
+import com.smalllife.model.Record;
 import com.smalllife.model.WebChatMsg;
 import com.smalllife.model.WebchatContentType;
 import lombok.extern.slf4j.Slf4j;
@@ -93,11 +94,7 @@ public class CommandServiceImpl implements CommandService {
             }else if(commandEntity.getCommand().equals(CommandType.TagContent)){
                 Long tagId=Long.valueOf(msg.getContent());
                 List<RecordEntity> tagEntity=recordService.list(sessionEntity,tagId);
-                return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagEntity.stream().map(item->{
-                    item.setId(null);
-                    item.setSessionId(null);
-                    return item;
-                }).collect(Collectors.toList())));
+                return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagEntity.stream().map(item-> Record.getRecord(item)).collect(Collectors.toList())));
             }
             return WebChatMsg.getTextMsg(sessionEntity, "未开发，谢谢关注");
         }
