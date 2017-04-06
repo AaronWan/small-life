@@ -60,6 +60,9 @@ public class CommandServiceImpl implements CommandService {
                         if(commandType.equals(CommandType.AllTag)){
                             commandDao.save(sessionEntity.getId(), CommandType.TagContent);
                             return WebChatMsg.getTextMsg(sessionEntity,"输入标签id查看记录内容"+ JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
+                        }else if(commandType.equals(CommandType.TagContent)){
+                            commandDao.save(sessionEntity.getId(), CommandType.TagContent);
+                            return WebChatMsg.getTextMsg(sessionEntity,"输入标签id查看记录内容"+ JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
                         }
                         commandDao.save(sessionEntity.getId(), commandType);
                         return WebChatMsg.getTextMsg(sessionEntity,"您选择了"+commandType.getName()+"，请输入内容～+～");
@@ -79,7 +82,7 @@ public class CommandServiceImpl implements CommandService {
                 }else{
                     tagEntity=tagService.save(sessionEntity, tagName, ContentType.text);
                 }
-                commandDao.save(sessionEntity.getId(),CommandType.AddRecord,tagEntity.getId()+"");
+                commandDao.save(sessionEntity.getId(),CommandType.AddRecord,tagEntity.getTagId()+"");
                 return WebChatMsg.getTextMsg(sessionEntity, tagName+"标签添加成功,请添加记录或0退出添加");
             }else if(commandEntity.getCommand().equals(CommandType.AddRecord)){
                 Long tagId=Long.valueOf(commandEntity.getContent());
