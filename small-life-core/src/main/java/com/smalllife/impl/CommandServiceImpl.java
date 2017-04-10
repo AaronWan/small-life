@@ -39,26 +39,26 @@ public class CommandServiceImpl implements CommandService {
     @Override
     public String processCommand(WebChatMsg msg) {
         log.debug("processCommand:{}", msg);
+        String content=msg.getContent();
         SessionEntity sessionEntity = sessionService.getSession(msg.getToUserName(), msg.getFromUserName());
         CommandEntity commandEntity = commandDao.find(sessionEntity.getId());
         log.debug("command:{}",JsonUtil.toJson(commandEntity));
         WebchatContentType type = msg.getType();
-        if(msg.getContent().equals("0")||msg.getContent().toLowerCase().equals(CommandType.Reset.name().toLowerCase())){
-            commandDao.delete(sessionEntity.getId());
-            return WebChatMsg.getTextMsg(sessionEntity, commandEntity.getCommand().getName()+"命令已清除");
-        }
         if (commandEntity == null) {
             if (!type.equals(WebchatContentType.text)) {
                 return WebChatMsg.getTextMsg(sessionEntity, CommandType.toCommandType());
             } else {
                 CommandType commandType;
                 try {
-                    commandType = CommandType.getCommand(msg.getContent());
+                    commandType = CommandType.getCommandFromUserContent(content);
                     if (commandType == null) {
                         return WebChatMsg.getTextMsg(sessionEntity,  CommandType.toCommandType());
                     } else {
-                        if(commandType.equals(CommandType.AllTag)){
-                            commandDao.save(sessionEntity.getId(), CommandType.TagContent);
+                        if(CommandType.isReset(content)){
+                            commandDao.delete(sessionEntity.getId());
+                            return WebChatMsg.getTextMsg(sessionEntity, commandEntity.getCommand().getName()+"命令已清除");
+                        }else if(commandType.equals(CommandType.AllTag)){
+                            commandDao.save(sessionEntity.getId(), CommandType.TagContent,commandType.getContent());
                             return WebChatMsg.getTextMsg(sessionEntity,"输入标签id查看记录内容"+ JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
                         }else if(commandType.equals(CommandType.TagContent)){
                             commandDao.save(sessionEntity.getId(), CommandType.TagContent);
@@ -74,7 +74,7 @@ public class CommandServiceImpl implements CommandService {
             }
         }else{
             if(commandEntity.getCommand().equals(CommandType.AddTag)){
-                String[] tag=msg.getContent().split(",");
+                String[] tag=content.split(",");
                 String tagName=tag[0];
                 TagEntity tagEntity;
                 if (tag.length == 2) {
@@ -91,11 +91,11 @@ public class CommandServiceImpl implements CommandService {
                 if(tagEntity.getType().equals(ContentType.date)){
                     entity = recordService.create(sessionEntity, tagId, new Date());
                 }else{
-                    entity=recordService.create(sessionEntity,tagId,msg.getContent());
+                    entity=recordService.create(sessionEntity,tagId,content);
                 }
                 return WebChatMsg.getTextMsg(sessionEntity, "第"+entity.getId()+"条记录保存成功，您可以继续添加或0退出");
             }else if(commandEntity.getCommand().equals(CommandType.TagContent)){
-                Long tagId=Long.valueOf(msg.getContent());
+                Long tagId=Long.valueOf(content);
                 List<RecordEntity> tagEntity=recordService.list(sessionEntity,tagId);
                 return WebChatMsg.getTextMsg(sessionEntity, JsonUtil.toPrettyJson(tagEntity.stream().map(item-> Record.getRecord(item)).collect(Collectors.toList())));
             }
