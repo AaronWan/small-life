@@ -62,7 +62,7 @@ public class CommandServiceImpl implements CommandService {
                             commandDao.save(sessionEntity.getId(), CommandType.TagContent,commandType.getContent());
                             return WebChatMsg.getTextMsg(sessionEntity,"输入标签id查看记录内容"+ JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
                         }else if(commandType.equals(CommandType.TagContent)){
-                            commandDao.save(sessionEntity.getId(), CommandType.TagContent);
+                            commandDao.save(sessionEntity.getId(), CommandType.TagContent,CommandType.TagContent.getContent());
                             return WebChatMsg.getTextMsg(sessionEntity,"输入标签id查看记录内容"+ JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
                         }
                         commandDao.save(sessionEntity.getId(), commandType);
