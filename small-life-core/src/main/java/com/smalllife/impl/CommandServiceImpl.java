@@ -44,6 +44,10 @@ public class CommandServiceImpl implements CommandService {
         CommandEntity commandEntity = commandDao.find(sessionEntity.getId());
         log.debug("command:{}",JsonUtil.toJson(commandEntity));
         WebchatContentType type = msg.getType();
+        if(CommandType.isReset(content)){
+            commandDao.delete(sessionEntity.getId());
+            return WebChatMsg.getTextMsg(sessionEntity, commandEntity.getCommand().getName()+"命令已清除");
+        }
         if (commandEntity == null) {
             if (!type.equals(WebchatContentType.text)) {
                 return WebChatMsg.getTextMsg(sessionEntity, CommandType.toCommandType());
@@ -54,10 +58,7 @@ public class CommandServiceImpl implements CommandService {
                     if (commandType == null) {
                         return WebChatMsg.getTextMsg(sessionEntity,  CommandType.toCommandType());
                     } else {
-                        if(CommandType.isReset(content)){
-                            commandDao.delete(sessionEntity.getId());
-                            return WebChatMsg.getTextMsg(sessionEntity, commandEntity.getCommand().getName()+"命令已清除");
-                        }else if(commandType.equals(CommandType.AllTag)){
+                        if(commandType.equals(CommandType.AllTag)){
                             commandDao.save(sessionEntity.getId(), CommandType.TagContent,commandType.getContent());
                             return WebChatMsg.getTextMsg(sessionEntity,"输入标签id查看记录内容"+ JsonUtil.toPrettyJson(tagService.list(sessionEntity).stream().map(item->{item.setId(null);item.setCreateTime(null);item.setModifyTime(null);item.setSessionId(null);return item;}).collect(Collectors.toList())));
                         }else if(commandType.equals(CommandType.TagContent)){
